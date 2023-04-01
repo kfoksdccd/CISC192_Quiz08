@@ -17,7 +17,7 @@ bool near(double expected, double result, double threshold)
 // Use when testing double/float values
 bool testNear(double expected, double result)
 {
-    if(false == near(expected, result, 0.002))
+    if(false == near(expected, result, 0.001))
     {
         cout << "FAILED: Expected " << expected << ", received " << result << ".\n";
     }
@@ -43,32 +43,19 @@ template<typename T> bool test(T expected, T result)
 }
 int main()
 {
-	ZodiacSign firstSign("this", ZodiacSign::Elements::AIR, "that", ZodiacSign::FEBRUARY);
-	(void)test<string>("this", firstSign.GetName());
-	(void)test<ZodiacSign::Months>(ZodiacSign::FEBRUARY, firstSign.GetMonth());
-
-	Zodiac testZodiac;
-	(void)test<bool>(false, testZodiac.AddSign("this", ZodiacSign::INVALID_ELEMENT, "that", ZodiacSign::FEBRUARY));
-	(void)test<bool>(false, testZodiac.AddSign("this", ZodiacSign::NUM_ELEMENTS, "that", ZodiacSign::FEBRUARY));
-	(void)test<bool>(false, testZodiac.AddSign("this", static_cast<ZodiacSign::Elements>(-1), "that", ZodiacSign::FEBRUARY));
-	(void)test<bool>(false, testZodiac.AddSign("this", ZodiacSign::FIRE, "that", ZodiacSign::INVALID_MONTH));
-	(void)test<bool>(false, testZodiac.AddSign("this", ZodiacSign::FIRE, "that", ZodiacSign::NUM_MONTHS));
-	(void)test<bool>(false, testZodiac.AddSign("this", ZodiacSign::FIRE, "that", static_cast<ZodiacSign::Months>(-1)));
-
-	(void)test<bool>(true, testZodiac.AddSign("NewSign", ZodiacSign::FIRE, "I made it up", ZodiacSign::MARCH));
-
-	testZodiac.Clear();
-
-	testZodiac.Populate();
-	// March was added as part of the populate call so this should fail as a second add attempt
-	(void)test<bool>(false, testZodiac.AddSign("NewSign", ZodiacSign::FIRE, "I made it up", ZodiacSign::MARCH));
-	// LEO was added as part of the populate call so this should fail as a second add attempt
-	(void)test<bool>(false, testZodiac.AddSign("LEO", ZodiacSign::FIRE, "I made it up", ZodiacSign::MARCH));
-
-	ZodiacSign mySign = testZodiac.GetMySign(ZodiacSign::JULY);
-	(void)test<string>("CANCER", mySign.GetName());
-	mySign = testZodiac.GetMySign(ZodiacSign::NUM_MONTHS);
-	(void)test<string>("None", mySign.GetName());
+    Circle     firstCircle(4.5);
+    Circle     secondCircle(0,0, 4.5);
+    Circle     thirdCircle(1,2, 2.5);
+    (void)test<bool>(true, (firstCircle == secondCircle));
+    (void)test<bool>(false, (firstCircle < secondCircle));
+    (void)test<bool>(true, (thirdCircle < firstCircle));
+    testNear(4.5, firstCircle.GetRadius());
+    testNear(4.5, firstCircle.GetRadius());
+    testNear(1.0, thirdCircle.GetX());
+    testNear(2.0, thirdCircle.GetY());
+    testNear(2.0, thirdCircle.GetY());
+    testNear(63.6173, secondCircle.GetArea());
+    (void)test<int>(3, Circle::GetTotal());
 
 	return 0;
 }

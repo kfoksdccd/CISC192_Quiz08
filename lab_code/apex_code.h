@@ -4,68 +4,29 @@
 #ifndef APEXLAB_APEX_CODE_H
 #define APEXLAB_APEX_CODE_H
 #include <iostream>
+#include <string>
 #include <vector>
 
 using namespace std;
 
-class ZodiacSign
-{
+class Circle {
 public:
-	enum Months
-	{
-		INVALID_MONTH,
-		JANUARY,
-		FEBRUARY,
-		MARCH,
-		APRIL,
-		MAY,
-		JUNE,
-		JULY,
-		AUGUST,
-		SEPTEMBER,
-		OCTOBER,
-		NOVEMBER,
-		DECEMBER,
-		NUM_MONTHS
-	};
+    Circle(double radius);
+    Circle(double x, double y, double radius);
+    double GetRadius() const;
+    double GetX() const;
+    double GetY() const;
+    double GetArea();
+    static int GetTotal();
 
-	string Months_Strings[NUM_MONTHS] = {"INVALID", "January", "February", 
-		"March", "April", "May", "June", "July", "August", "September",
-	       	"October", "November", "December"};
-
-	enum Elements
-	{
-		INVALID_ELEMENT,
-		FIRE,
-		WATER,
-		EARTH,
-		AIR,
-		NUM_ELEMENTS
-	};
-
-	string Elements_Strings[NUM_ELEMENTS] = {"INVALID", "FIRE", "WATER",
-	       	"EARTH", "AIR"};
-
-	//
-	// Add constructor
-	//
-
-	//
-	// Add getters
-	//
-
-	void Print();
 private:
-	ZodiacSign();
-
-	string Name;
-	Months Month;
-	Elements Element;
-	string Description;
+    void          init(double x, double y, double radius);
+    double        _radius;
+    double        _x;
+    double        _y;
+    static int    nTotal;
 };
-
-//
-// Add Zodiac declartion
-//
+bool operator==(const Circle& lhs, const Circle& rhs);
+bool operator<(const Circle& lhs, const Circle& rhs);
 
 #endif //APEXLAB_APEX_CODE_H
