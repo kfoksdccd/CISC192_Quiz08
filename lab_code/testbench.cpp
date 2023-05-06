@@ -43,19 +43,35 @@ template<typename T> bool test(T expected, T result)
 }
 int main()
 {
-    Circle     firstCircle(4.5);
-    Circle     secondCircle(0,0, 4.5);
-    Circle     thirdCircle(1,2, 2.5);
-    (void)test<bool>(true, (firstCircle == secondCircle));
-    (void)test<bool>(false, (firstCircle < secondCircle));
-    (void)test<bool>(true, (thirdCircle < firstCircle));
-    testNear(4.5, firstCircle.GetRadius());
-    testNear(4.5, firstCircle.GetRadius());
-    testNear(1.0, thirdCircle.GetX());
-    testNear(2.0, thirdCircle.GetY());
-    testNear(2.0, thirdCircle.GetY());
-    testNear(63.6173, secondCircle.GetArea());
-    (void)test<int>(3, Circle::GetTotal());
+
+    LinkedList arList01;
+
+    arList01.insertFromFile("quiz07_input01.txt");
+    (void)test<string>("LinkedList (13): 5 20 16 8 22 100 68 96 8 68 2 98 10 \n", arList01.toString());
+    (void)test<string>("LinkedList REV (13): 10 98 2 68 8 96 68 100 22 8 16 20 5 \n", arList01.RevtoString());
+    arList01.deleteData(68);
+    (void)test<string>("LinkedList (11): 5 20 16 8 22 100 96 8 2 98 10 \n", arList01.toString());
+    arList01.deleteData(8);
+    (void)test<string>("LinkedList (9): 5 20 16 22 100 96 2 98 10 \n", arList01.toString());
+    arList01.deleteData(5);
+    (void)test<string>("LinkedList (8): 20 16 22 100 96 2 98 10 \n", arList01.toString());
+    arList01.deleteData(10);
+    (void)test<string>("LinkedList (7): 20 16 22 100 96 2 98 \n", arList01.toString());
+    arList01.deleteData(100);
+    (void)test<string>("LinkedList REV (6): 98 2 96 22 16 20 \n", arList01.RevtoString());
+    arList01.deleteData(98);
+    (void)test<string>("LinkedList REV (5): 2 96 22 16 20 \n", arList01.RevtoString());
+    arList01.deleteData(2);
+    (void)test<string>("LinkedList (4): 20 16 22 96 \n", arList01.toString());
+    arList01.deleteData(22);
+    (void)test<string>("LinkedList REV (3): 96 16 20 \n", arList01.RevtoString());
+    arList01.deleteData(16);
+    (void)test<string>("LinkedList (2): 20 96 \n", arList01.toString());
+    arList01.deleteData(20);
+    (void)test<string>("LinkedList REV (1): 96 \n", arList01.RevtoString());
+    arList01.deleteData(96);
+    (void)test<string>("LinkedList (0): \n", arList01.toString());
+    (void)test<string>("LinkedList REV (0): \n", arList01.RevtoString());
 
 	return 0;
 }

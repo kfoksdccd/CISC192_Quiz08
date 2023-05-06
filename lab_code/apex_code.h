@@ -5,39 +5,42 @@
 #define APEXLAB_APEX_CODE_H
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
-class Circle {
-public:
-    // Constructor with (0,0) as origin
-    Circle(double radius);
-
-    // Constructor with (x,y) as origin
-    Circle(double x, double y, double radius);
-
-    double GetRadius() const;
-    double GetX() const;
-    double GetY() const;
-
-    // Compute the area of the circle
-    double GetArea();
-
-    // Return the total number of Circle being instantiated
-    static int GetTotal();
-
+class Node {
 private:
-    double        _radius;
-    double        _x;
-    double        _y;
-    static int    nTotal;
+    int    _nData;
+    Node   *_pPrev;     // points to the previous Node in the LinkedList
+    Node   *_pNext;     // points to the next Node in the LinkedList
+public:
+    Node(int nData, Node *pPrev, Node *pNext);
+    int     getData() const;
+    Node*   getNext() const;
+    Node*   getPrev() const;
+    void    setData(int nData);
+    void    setNext(Node *pNext);
+    void    setPrev(Node *pPrev);
 };
 
-// When two Circles are equal, all of their non-static private data members are equal.
-bool operator==(const Circle& lhs, const Circle& rhs);
+class LinkedList {
+private:
+    Node*     _head;    // points to the first item of the LinkedList
+    // Note: For _head Node, its _pPrev = nullptr
 
-// When CircleA is less than CircleB, it means the radius of CircleA is less than the radius of CircleB
-bool operator<(const Circle& lhs, const Circle& rhs);
+    Node*     _tail;    // points to the last item of the LinkedList.
+    // Note: For _tail Node, its _pNext = nullptr
 
+    int       _size;
+
+public:
+    LinkedList();
+    bool    insertFromFile(string filename);
+    void    insertData(int data);
+    void    deleteData(int data);
+    int     size();
+    string  toString();
+    string  RevtoString();
+
+};
 #endif //APEXLAB_APEX_CODE_H
