@@ -10,14 +10,17 @@ using namespace std;
 
 class Node {
 private:
+    int    _nIdx;       // Index (list in Vector)
     int    _nData;
     Node   *_pPrev;     // points to the previous Node in the LinkedList
     Node   *_pNext;     // points to the next Node in the LinkedList
 public:
-    Node(int nData, Node *pPrev, Node *pNext);
+    Node(int nIndex, int nData, Node *pPrev, Node *pNext);
+    int     getIndex() const;
     int     getData() const;
     Node*   getNext() const;
     Node*   getPrev() const;
+    void    setIndex(int nIndex);
     void    setData(int nData);
     void    setNext(Node *pNext);
     void    setPrev(Node *pPrev);
@@ -35,9 +38,9 @@ private:
 
 public:
     LinkedList();
-    bool    insertFromFile(string filename);
-    void    insertData(int data);
-    void    deleteData(int data);
+    void    pushback(int data);
+    void    insert(int index, int data);
+    void    erase(int index);
     int     size();
     string  toString();
     string  RevtoString();

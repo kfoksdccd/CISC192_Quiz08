@@ -2,14 +2,18 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <fstream>
 
 using namespace std;
 
-Node::Node(int nData, Node *pPrev, Node *pNext) {
+Node::Node(int nIndex, int nData, Node *pPrev, Node *pNext) {
+    _nIdx = nIndex;
     _nData = nData;
     _pPrev = pPrev;
     _pNext = pNext;
+}
+
+int     Node::getIndex() const {
+    return _nIdx;
 }
 
 int     Node::getData() const {
@@ -22,6 +26,10 @@ Node*   Node::getNext() const {
 
 Node*   Node::getPrev() const {
     return _pPrev;
+}
+
+void    Node::setIndex(int nIndex) {
+    _nIdx = nIndex;    
 }
 
 void    Node::setData(int nData) {
@@ -42,23 +50,21 @@ LinkedList::LinkedList() {
     _size = 0;
 }
 
-bool LinkedList::insertFromFile(string filename) {
+void LinkedList::pushback(int data) {
     // TODO
-    return false;   // Need to be changed!!
+} // pushback
 
-}
-
-void LinkedList::insertData(int data) {
+void LinkedList::insert(int index, int data) {
     // TODO
-}
+} // insert
 
-void LinkedList::deleteData(int data) {
+void LinkedList::erase(int index) {
     // TODO
-}
+} // erase()
 
 int  LinkedList::size() {
     return _size;
-}
+} // size()
 
 string LinkedList::toString() {
     Node            *curNode;
@@ -72,13 +78,13 @@ string LinkedList::toString() {
             istream << endl;
             break;
         }
-        istream << curNode->getData() << " ";
+        istream << "[" << curNode->getIndex() << "]" << curNode->getData() << " ";
         curNode = curNode->getNext();
     }
     szStr = istream.str();
     return szStr;
-    
-}
+
+} // toString()
 
 string LinkedList::RevtoString() {
     Node            *curNode;
@@ -94,11 +100,11 @@ string LinkedList::RevtoString() {
             istream << endl;
             break;
         }
-        istream << curNode->getData() << " ";
+        istream << "[" << curNode->getIndex() << "]" << curNode->getData() << " ";
         curNode = curNode->getPrev();
     }
 
     szStr = istream.str();
     return szStr;
-    
-} 
+
+}  // RevtoString()
